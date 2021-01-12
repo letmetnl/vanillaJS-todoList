@@ -16,8 +16,8 @@ function addTodo(event) {
 
   // creating the list item
   const newTask = document.createElement("li");
-  newTask.innerText = "new Task";
-  newTask.classList.add("list-item");
+  newTask.innerText = "New Task";
+  newTask.classList.add("task-text");
   todoDiv.appendChild(newTask);
 
   // creating the buttons for todo-item

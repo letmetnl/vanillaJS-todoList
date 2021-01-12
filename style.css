@@ -43,3 +43,48 @@ form button {
   color: rgb(148, 206, 14);
   background-color: rgb(11, 103, 189);
 }
+
+.todo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.todo-list {
+  list-style: none;
+  min-width: 30%;
+  /* margin: 0.5rem; */
+}
+.todo {
+  background-color: rgb(231, 250, 162);
+  /* padding: 0.2rem; */
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  color: #f76b2b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+}
+/* style to push buttons to end */
+.todo li {
+  flex: 1;
+}
+/* style for task text */
+.task-text {
+  padding: 0.2rem;
+}
+
+/* buttons styling for each todo list item */
+.delete-btn,
+.complete-btn {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: coral;
+  color: antiquewhite;
+  border: none;
+  cursor: pointer;
+}
+
+.complete-btn {
+  background: chartreuse;
+}
