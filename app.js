@@ -16,7 +16,7 @@ function addTodo(event) {
 
   // creating the list item
   const newTask = document.createElement("li");
-  newTask.innerText = "New Task";
+  newTask.innerText = todoInput.value;
   newTask.classList.add("task-text");
   todoDiv.appendChild(newTask);
 
@@ -35,4 +35,23 @@ function addTodo(event) {
 
   // append this complete div to todolist in html
   todoList.appendChild(todoDiv);
+
+  // setting input value null after successfully adding the task
+  todoInput.value = "";
+
+  // adding eventlistner to delete button
+  deleteTask.addEventListener("click", deleteTodo);
+  //event listner for marking a task completed
+  taskCompleted.addEventListener("click", completedTodo);
+}
+
+// function for deleting the task
+function deleteTodo(e) {
+  // as the full task(todoDiv) is parent of the parent of delete button
+  e.target.parentElement.remove();
+}
+
+// function for marking a task completed
+function completedTodo(e) {
+  e.target.parentElement.classList.toggle("completed");
 }

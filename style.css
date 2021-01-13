@@ -33,14 +33,14 @@ form button {
 
 .submit-btn {
   /* font-size: 3.5vh; */
-  background-color: rgb(148, 206, 14);
+  background-color: rgb(196, 252, 66);
   color: green;
   cursor: pointer;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .submit-btn:hover {
-  color: rgb(148, 206, 14);
+  color: rgb(79, 245, 79);
   background-color: rgb(11, 103, 189);
 }
 
@@ -64,6 +64,7 @@ form button {
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
+  transition: all 0.5s ease-in;
 }
 /* style to push buttons to end */
 .todo li {
@@ -79,12 +80,24 @@ form button {
 .complete-btn {
   font-size: 1.5rem;
   padding: 0.5rem;
-  background: coral;
+  background: rgb(218, 33, 27);
   color: antiquewhite;
   border: none;
   cursor: pointer;
 }
 
 .complete-btn {
-  background: chartreuse;
+  background: green;
+}
+
+/* styling for marking a task completed */
+.completed {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* disabling default i tag clicking infact we want to operate through complete button block */
+.fa-trash,
+.fa-check {
+  pointer-events: none;
 }
