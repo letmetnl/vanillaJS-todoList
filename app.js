@@ -48,7 +48,13 @@ function addTodo(event) {
 // function for deleting the task
 function deleteTodo(e) {
   // as the full task(todoDiv) is parent of the parent of delete button
-  e.target.parentElement.remove();
+  const item = e.target.parentElement;
+  // adding class for animation on deleted task
+  item.classList.add("fall-animation");
+  // using method of js to wait for animation to end
+  item.addEventListener("transitionend", function () {
+    item.remove();
+  });
 }
 
 // function for marking a task completed

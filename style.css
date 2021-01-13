@@ -95,9 +95,46 @@ form button {
   text-decoration: line-through;
   opacity: 0.7;
 }
+/* deleted task animated falling */
+.fall-animation {
+  transform: translateY(8rem) rotateZ(20deg);
+  opacity: 0;
+}
 
 /* disabling default i tag clicking infact we want to operate through complete button block */
 .fa-trash,
 .fa-check {
+  pointer-events: none;
+}
+
+/* removing default styling of select */
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  appearance: none;
+}
+.select {
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+select {
+  color: #f76b2b;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  width: 12rem;
+  cursor: pointer;
+}
+/* dropdown icon */
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: #f76b2b;
   pointer-events: none;
 }
