@@ -64,7 +64,7 @@ form button {
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  transition: all 0.5s ease-in;
+  transition: all 0.3s ease-in;
 }
 /* style to push buttons to end */
 .todo li {
@@ -137,4 +137,20 @@ select {
   padding: 0.5rem;
   background: #f76b2b;
   pointer-events: none;
+}
+
+/* styling the task counter */
+.total {
+  position: relative;
+  display: flex;
+  margin-top: 5%;
+  /* align-items: center; */
+  margin-left: 32%;
+  /* justify-content: center; */
+  font-size: 2.5rem;
+  color: rgb(250, 16, 16);
+  min-height: 10vh;
+}
+.task-count {
+  color: darkred;
 }

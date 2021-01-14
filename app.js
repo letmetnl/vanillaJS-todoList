@@ -3,12 +3,25 @@ const todoInput = document.querySelector(".todo-input");
 const todoButton = document.querySelector(".submit-btn");
 const todoList = document.querySelector(".todo-list");
 const filterOption = document.querySelector(".filter-todos");
+const taskCount = document.querySelector(".task-count");
 
 // Event Listeners
 todoButton.addEventListener("click", addTodo);
 filterOption.addEventListener("click", filterTasks);
+//for loading locally stored tasks
+document.addEventListener("DOMContentLoaded", getTodos);
+// calling the Count-tasks function on pageload
+countTasks();
 
 // tasks or functions to be performed on actions
+
+// setting value for taskcount each time page refresh
+function countTasks() {
+  const count = todoList.childElementCount;
+  // set value
+  taskCount.innerText = count;
+}
+
 function addTodo(event) {
   // preventing default submitting of form
   event.preventDefault();
@@ -22,6 +35,8 @@ function addTodo(event) {
   newTask.classList.add("task-text");
   todoDiv.appendChild(newTask);
 
+  // adding the task to local storage
+  saveTodoToLocal(todoInput.value);
   // creating the buttons for todo-item
   // checkmark button
   const taskCompleted = document.createElement("button");
@@ -45,19 +60,24 @@ function addTodo(event) {
   deleteTask.addEventListener("click", deleteTodo);
   //event listner for marking a task completed
   taskCompleted.addEventListener("click", completedTodo);
+
+  // call countTasks function to update tasks num
+  countTasks();
 }
 
 // function for deleting the task
-function deleteTodo(e) {
+deleteTodo = (e) => {
   // as the full task(todoDiv) is parent of the parent of delete button
   const item = e.target.parentElement;
   // adding class for animation on deleted task
   item.classList.add("fall-animation");
   // using method of js to wait for animation to end
   item.addEventListener("transitionend", function () {
+    // call taskCount
+    countTasks();
     item.remove();
   });
-}
+};
 
 // function for marking a task completed
 function completedTodo(e) {
@@ -89,5 +109,65 @@ function filterTasks(e) {
         }
         break;
     }
+  });
+}
+
+// function for storing tasks in local storage
+function saveTodoToLocal(todo) {
+  let todos;
+  // check if there's already any task stored?
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  // console.log(todo);
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+// function for loading locally stored todos
+function getTodos() {
+  let todos;
+  // check if there's already any task stored?
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  // create the element again
+  todos.forEach(function (todo) {
+    const todoDiv = document.createElement("div");
+    todoDiv.classList.add("todo");
+
+    // creating the list item
+    const newTask = document.createElement("li");
+    newTask.innerText = todo;
+    newTask.classList.add("task-text");
+    todoDiv.appendChild(newTask);
+
+    // creating the buttons for todo-item
+    // checkmark button
+    const taskCompleted = document.createElement("button");
+    taskCompleted.innerHTML = '<i class="fas fa-check"></i>';
+    taskCompleted.classList.add("complete-btn");
+    todoDiv.appendChild(taskCompleted);
+
+    //Delete button
+    const deleteTask = document.createElement("button");
+    deleteTask.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteTask.classList.add("delete-btn");
+    todoDiv.appendChild(deleteTask);
+
+    // append this complete div to todolist in html
+    todoList.appendChild(todoDiv);
+
+    // adding eventlistner to delete button
+    deleteTask.addEventListener("click", deleteTodo);
+    //event listner for marking a task completed
+    taskCompleted.addEventListener("click", completedTodo);
+
+    // count tasks after loading from local storage
+    countTasks();
   });
 }
