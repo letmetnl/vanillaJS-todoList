@@ -71,6 +71,8 @@ deleteTodo = (e) => {
   const item = e.target.parentElement;
   // adding class for animation on deleted task
   item.classList.add("fall-animation");
+  //remove from local storage also
+  deleteTodoFromLocal(item);
   // using method of js to wait for animation to end
   item.addEventListener("transitionend", function () {
     // call taskCount
@@ -170,4 +172,23 @@ function getTodos() {
     // count tasks after loading from local storage
     countTasks();
   });
+}
+
+// function for deleting todos from local storage
+function deleteTodoFromLocal(todo) {
+  let todos;
+  // check if there's already any task stored?
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  // getting index of task by name
+  const todoIndex = todos.indexOf(todo.children[0].innerText);
+  // console.log(todoIndex);
+  // console.log(todo.children[0].innerText);
+  todos.splice(todoIndex, 1);
+
+  //setback the localStorage
+  localStorage.setItem("todos", JSON.stringify(todos));
 }
